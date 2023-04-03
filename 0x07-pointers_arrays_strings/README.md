@@ -1,1 +1,1 @@
-EVen more pointers, arrays and strings
+Evn more pointers, strings and arrays
