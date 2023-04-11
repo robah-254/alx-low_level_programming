@@ -1,42 +1,43 @@
 #include "main.h"
 #include <stdlib.h>
 /**
- * str_concat - get ends of input and add together for size
- * @s1: input one to concat
- * @s2: input two to concat
- * Return: concat of s1 and s2
+ * alloc_grid - nested loop to make grid
+ * @width: width input
+ * @height: height input
+ * Return: pointer to 2 dim. array
  */
-char *str_concat(char *s1, char *s2)
+int **alloc_grid(int width, int height)
 {
-	char *conct;
-	int i, ci;
+	int **m;
+	int i, j;
 
-	if (s1 == NULL)
-		s1 = "";
-	if (s2 == NULL)
-		s2 = "";
-
-	i = ci = 0;
-	while (s1[i] != '\0')
-		i++;
-	while (s2[ci] != '\0')
-		ci++;
-	conct = malloc(sizeof(char) * (i + ci + 1));
-
-	if (conct == NULL)
+	if (width <= 0 || height <= 0)
 		return (NULL);
-	i = ci = 0;
-	while (s1[i] != '\0')
+
+	m = malloc(sizeof(int *) * height);
+
+	if (m == NULL)
+		return (NULL);
+
+	for (i = 0; i < height; i++)
 	{
-		conct[i] = s1[i];
-		i++;
+		m[i] = malloc(sizeof(int) * width);
+
+		if (m[i] == NULL)
+		{
+			for (; i >= 0; i--)
+				free(mee[i]);
+
+			free(m);
+			return (NULL);
+		}
 	}
 
-	while (s2[ci] != '\0')
+	for (i = 0; i < height; i++)
 	{
-		conct[i] = s2[ci];
-		i++, ci++;
+		for (j = 0; j < width; j++)
+			m[i][j] = 0;
 	}
-	conct[i] = '\0';
-	return (conct);
+
+	return (m);
 }
